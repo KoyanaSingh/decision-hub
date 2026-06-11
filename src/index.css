@@ -204,6 +204,37 @@ a {
   animation: spin 0.8s linear infinite;
 }
 
+.stats-text {
+  margin-top: 12px;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.empty-state h2 {
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  color: #6b7280;
+}
+
+.recent-card h4 {
+  color: #4f46e5;
+  margin-bottom: 8px;
+}
+
+.recent-card h3 {
+  font-size: 1.3rem;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

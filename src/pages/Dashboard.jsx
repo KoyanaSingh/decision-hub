@@ -95,6 +95,8 @@ function Dashboard() {
         <p className="hero-subtitle">
           Can't decide what to do? Let Decision Hub choose for you.
         </p>
+
+        <p className="stats-text">{categories.length} Categories Available</p>
       </div>
 
       <input
@@ -115,16 +117,24 @@ function Dashboard() {
         </Link>
       </div>
 
-      <div className="grid">
-        {filteredCategories.map((category) => (
-          <CategoryCard
-            key={category.id}
-            category={category}
-            onDelete={deleteCategory}
-            onQuickPick={quickPick}
-          />
-        ))}
-      </div>
+      {filteredCategories.length === 0 ? (
+        <div className="empty-state">
+          <h2>No categories found</h2>
+
+          <p>Create a category or try another search.</p>
+        </div>
+      ) : (
+        <div className="grid">
+          {filteredCategories.map((category) => (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              onDelete={deleteCategory}
+              onQuickPick={quickPick}
+            />
+          ))}
+        </div>
+      )}
       {recentHistory.length > 0 && (
         <>
           <h2
@@ -138,10 +148,10 @@ function Dashboard() {
 
           <div className="grid">
             {recentHistory.map((decision, index) => (
-              <div key={index} className="card">
-                <h3>{decision.result}</h3>
+              <div key={index} className="card recent-card">
+                <h4>{decision.category}</h4>
 
-                <p>{decision.category}</p>
+                <h3>{decision.result}</h3>
               </div>
             ))}
           </div>
