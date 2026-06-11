@@ -147,6 +147,33 @@ function Dashboard() {
           </div>
         </>
       )}
+
+      {quickResult && (
+        <div className="modal-overlay" onClick={() => setQuickResult(null)}>
+          <div className="result-modal" onClick={(e) => e.stopPropagation()}>
+            {quickResult.loading ? (
+              <>
+                <div className="spinner"></div>
+                <h2>Choosing...</h2>
+              </>
+            ) : (
+              <>
+                <div className="result-emoji">🎉</div>
+
+                <h3>Your Decision</h3>
+
+                <h1>{quickResult.result}</h1>
+
+                <p>From {quickResult.category}</p>
+
+                <button className="btn" onClick={() => setQuickResult(null)}>
+                  Awesome
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
