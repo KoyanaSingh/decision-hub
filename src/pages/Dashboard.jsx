@@ -7,11 +7,13 @@ import {
   saveHistory,
 } from "../utils/storage";
 import { Link } from "react-router-dom";
+import CreateCategoryModal from "../components/CreateCategoryModal";
 
 function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState("");
   const [quickResult, setQuickResult] = useState(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   useEffect(() => {
     setCategories(loadCategories());
@@ -23,15 +25,11 @@ function Dashboard() {
     }
   }, [categories]);
 
-  const addCategory = () => {
-    const name = prompt("Category Name?")?.trim();
-
-    if (!name) return;
-
+  const addCategory = ({ name, icon }) => {
     const newCategory = {
       id: Date.now().toString(),
       name,
-      icon: "📌",
+      icon,
       items: [],
     };
 
@@ -108,7 +106,7 @@ function Dashboard() {
       />
 
       <div className="actions">
-        <button className="btn" onClick={addCategory}>
+        <button className="btn" onClick={() => setShowCreateModal(true)}>
           + New Category
         </button>
 
@@ -183,6 +181,13 @@ function Dashboard() {
             )}
           </div>
         </div>
+      )}
+
+      {showCreateModal && (
+        <CreateCategoryModal
+          onClose={() => setShowCreateModal(false)}
+          onCreate={addCategory}
+        />
       )}
     </div>
   );

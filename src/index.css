@@ -235,6 +235,48 @@ a {
   font-size: 1.3rem;
 }
 
+.modal-card {
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.icon-btn {
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icon-btn.active {
+  border-color: #4f46e5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
