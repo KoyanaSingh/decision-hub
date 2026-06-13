@@ -27,12 +27,12 @@ function Dashboard() {
     }
   }, [categories]);
 
-  const addCategory = ({ name, icon }) => {
+  const addCategory = ({ name, icon, items = [] }) => {
     const newCategory = {
       id: Date.now().toString(),
       name,
       icon,
-      items: [],
+      items,
     };
 
     setCategories([...categories, newCategory]);

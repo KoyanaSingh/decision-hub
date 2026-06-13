@@ -236,11 +236,18 @@ a {
 }
 
 .modal-card {
+  background: white;
   width: 90%;
   max-width: 500px;
-  background: white;
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 20px;
+  padding: 25px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-card h2 {
+  text-align: center;
+  font-size: "25px";
 }
 
 .modal-input {
@@ -310,6 +317,27 @@ a {
 .empty-category p {
   color: #6b7280;
   margin-bottom: 20px;
+}
+
+.template-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.template-btn {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.template-btn:hover {
+  background: #f8fafc;
 }
 
 @keyframes spin {

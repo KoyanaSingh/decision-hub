@@ -15,6 +15,34 @@ const ICONS = [
   "❤️",
 ];
 
+const TEMPLATES = [
+  {
+    name: "What To Eat",
+    icon: "🍕",
+    items: ["Pizza", "Burger", "Biryani", "Dosa", "Momos", "Pasta"],
+  },
+  {
+    name: "What To Study",
+    icon: "📚",
+    items: ["DSA", "React", "Node.js", "System Design", "JavaScript", "SQL"],
+  },
+  {
+    name: "What To Watch",
+    icon: "🎬",
+    items: ["Movie", "Anime", "YouTube", "Documentary", "Netflix Series"],
+  },
+  {
+    name: "Chores",
+    icon: "🧹",
+    items: ["Laundry", "Clean Room", "Wash Dishes", "Organize Desk", "Vacuum"],
+  },
+  {
+    name: "Mom's Cooking",
+    icon: "👩",
+    items: ["Paneer", "Rajma", "Dal Rice", "Chole", "Pulao", "Paratha"],
+  },
+];
+
 function CreateCategoryModal({ onClose, onCreate }) {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("📌");
@@ -42,6 +70,10 @@ function CreateCategoryModal({ onClose, onCreate }) {
           onChange={(e) => setName(e.target.value)}
         />
 
+        <hr />
+
+        <h3 style={{ marginTop: "20px" }}>Select Icon</h3>
+
         <div className="icon-grid">
           {ICONS.map((item) => (
             <button
@@ -50,6 +82,30 @@ function CreateCategoryModal({ onClose, onCreate }) {
               onClick={() => setIcon(item)}
             >
               {item}
+            </button>
+          ))}
+        </div>
+
+        <hr />
+
+        <h3 style={{ marginTop: "20px" }}>Quick Templates</h3>
+
+        <div className="template-grid">
+          {TEMPLATES.map((template) => (
+            <button
+              key={template.name}
+              className="template-btn"
+              onClick={() => {
+                onCreate({
+                  name: template.name,
+                  icon: template.icon,
+                  items: template.items,
+                });
+
+                onClose();
+              }}
+            >
+              {template.icon} {template.name}
             </button>
           ))}
         </div>
