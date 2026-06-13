@@ -277,6 +277,10 @@ a {
   gap: 10px;
 }
 
+.delete-confirm-btn {
+  background: #dc2626;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

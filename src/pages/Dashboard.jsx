@@ -8,12 +8,14 @@ import {
 } from "../utils/storage";
 import { Link } from "react-router-dom";
 import CreateCategoryModal from "../components/CreateCategoryModal";
+import DeleteModal from "../components/DeleteModal";
 
 function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState("");
   const [quickResult, setQuickResult] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState(null);
 
   useEffect(() => {
     setCategories(loadCategories());
@@ -37,13 +39,11 @@ function Dashboard() {
   };
 
   const deleteCategory = (id) => {
-    const confirmDelete = window.confirm("Delete this category?");
-
-    if (!confirmDelete) return;
-
     const updated = categories.filter((category) => category.id !== id);
 
     setCategories(updated);
+
+    setDeleteCategoryId(null);
   };
 
   const quickPick = (category) => {
@@ -127,7 +127,7 @@ function Dashboard() {
             <CategoryCard
               key={category.id}
               category={category}
-              onDelete={deleteCategory}
+              onDelete={(id) => setDeleteCategoryId(id)}
               onQuickPick={quickPick}
             />
           ))}
@@ -187,6 +187,15 @@ function Dashboard() {
         <CreateCategoryModal
           onClose={() => setShowCreateModal(false)}
           onCreate={addCategory}
+        />
+      )}
+
+      {deleteCategoryId && (
+        <DeleteModal
+          title="Delete Category?"
+          message={categories.find((c) => c.id === deleteCategoryId)?.name}
+          onCancel={() => setDeleteCategoryId(null)}
+          onConfirm={() => deleteCategory(deleteCategoryId)}
         />
       )}
     </div>
