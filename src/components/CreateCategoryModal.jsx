@@ -47,9 +47,13 @@ function CreateCategoryModal({ onClose, onCreate }) {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("📌");
   const [showTemplates, setShowTemplates] = useState(false);
+  const [error, setError] = useState("");
 
   const handleCreate = () => {
-    if (!name.trim()) return;
+    if (!name.trim()) {
+      setError("Category name is required");
+      return;
+    }
 
     onCreate({
       name: name.trim(),
@@ -68,8 +72,13 @@ function CreateCategoryModal({ onClose, onCreate }) {
           className="modal-input"
           placeholder="Category Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            setError("");
+          }}
         />
+
+        {error && <p className="error-text">{error}</p>}
 
         <hr />
 

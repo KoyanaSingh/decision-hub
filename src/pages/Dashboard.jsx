@@ -25,43 +25,43 @@ function Dashboard() {
     saveCategories(categories);
   }, [categories]);
 
-  const existingCategory = categories.find(
-    (cat) => cat.name.toLowerCase() === name.toLowerCase(),
-  );
-
-  if (existingCategory && items.length > 0) {
-    const append = window.confirm(
-      `"${name}" already exists.\n\nAppend template items?`,
+  const addCategory = ({ name, icon, items = [] }) => {
+    const existingCategory = categories.find(
+      (cat) => cat.name.toLowerCase() === name.toLowerCase(),
     );
 
-    if (!append) return;
+    if (existingCategory && items.length > 0) {
+      const append = window.confirm(
+        `"${name}" already exists.\n\nAppend template items?`,
+      );
 
-    const updatedCategories = categories.map((cat) => {
-      if (cat.id === existingCategory.id) {
-        return {
-          ...cat,
-          items: [...new Set([...cat.items, ...items])],
-        };
-      }
+      if (!append) return;
 
-      return cat;
-    });
+      const updatedCategories = categories.map((cat) => {
+        if (cat.id === existingCategory.id) {
+          return {
+            ...cat,
+            items: [...new Set([...cat.items, ...items])],
+          };
+        }
 
-    const addCategory = ({ name, icon, items = [] }) => {
-      const newCategory = {
-        id: Date.now().toString(),
-        name,
-        icon,
-        items,
-      };
+        return cat;
+      });
 
       setCategories(updatedCategories);
 
       return;
+    }
+
+    const newCategory = {
+      id: Date.now().toString(),
+      name,
+      icon,
+      items,
     };
 
     setCategories([...categories, newCategory]);
-  }
+  };
 
   const deleteCategory = (id) => {
     const updated = categories.filter((category) => category.id !== id);
