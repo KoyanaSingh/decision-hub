@@ -1,11 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadCategories, saveCategories } from "../utils/storage";
+import AddItemModal from "../components/AddItemModal";
 
 function Category() {
   const { id } = useParams();
-
   const [category, setCategory] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     const categories = loadCategories();
@@ -15,9 +16,7 @@ function Category() {
     setCategory(foundCategory);
   }, [id]);
 
-  const addItem = () => {
-    const item = prompt("Item Name?");
-
+  const addItem = (item) => {
     if (!item || !category) return;
 
     const categories = loadCategories();
@@ -77,7 +76,7 @@ function Category() {
         {category.icon} {category.name}
       </h1>
 
-      <button className="btn" onClick={addItem}>
+      <button className="btn" onClick={() => setShowAddModal(true)}>
         + Add Item
       </button>
 
@@ -94,7 +93,7 @@ function Category() {
 
             <p>Start by adding your first item.</p>
 
-            <button className="btn" onClick={addItem}>
+            <button className="btn" onClick={() => setShowAddModal(true)}>
               + Add First Item
             </button>
           </div>
@@ -128,6 +127,9 @@ function Category() {
           🎡 Spin Wheel
         </button>
       </Link>
+      {showAddModal && (
+        <AddItemModal onClose={() => setShowAddModal(false)} onAdd={addItem} />
+      )}
     </div>
   );
 }
