@@ -86,24 +86,36 @@ function Category() {
           marginTop: "20px",
         }}
       >
-        {category.items.length === 0 && <p>No items yet</p>}
+        {category.items.length === 0 ? (
+          <div className="empty-category">
+            <div className="empty-icon">📭</div>
 
-        {category.items.map((item, index) => (
-          <div
-            key={index}
-            className="card"
-            style={{
-              marginBottom: "10px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <span>{item}</span>
+            <h2>No items yet</h2>
 
-            <button onClick={() => deleteItem(index)}>❌</button>
+            <p>Start by adding your first item.</p>
+
+            <button className="btn" onClick={addItem}>
+              + Add First Item
+            </button>
           </div>
-        ))}
+        ) : (
+          category.items.map((item, index) => (
+            <div
+              key={index}
+              className="card"
+              style={{
+                marginBottom: "10px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <span>{item}</span>
+
+              <button onClick={() => deleteItem(index)}>❌</button>
+            </div>
+          ))
+        )}
       </div>
 
       <Link to={`/wheel/${id}`}>
