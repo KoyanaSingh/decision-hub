@@ -71,6 +71,7 @@ function Dashboard() {
 
       history.unshift({
         category: category.name,
+        icon: category.icon,
         result,
         time: new Date().toLocaleString(),
       });
@@ -147,7 +148,11 @@ function Dashboard() {
           <div className="grid">
             {recentHistory.map((decision, index) => (
               <div key={index} className="card recent-card">
-                <h4>{decision.category}</h4>
+                <div className="recent-header">
+                  <span className="recent-icon">{decision.icon || "📌"}</span>
+
+                  <h4>{decision.category}</h4>
+                </div>
 
                 <h3>{decision.result}</h3>
               </div>
