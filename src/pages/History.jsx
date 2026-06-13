@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { loadHistory } from "../utils/storage";
+import PageHeader from "../components/PageHeader";
 
 function History() {
   const history = loadHistory();
 
   return (
     <div className="container">
-      <Link to="/">← Back</Link>
+      <PageHeader />
 
       <h1 className="page-title">History</h1>
 

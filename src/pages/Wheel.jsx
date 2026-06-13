@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadCategories, loadHistory, saveHistory } from "../utils/storage";
+import PageHeader from "../components/PageHeader";
 
 function Wheel() {
   const { id } = useParams();
@@ -51,7 +52,8 @@ function Wheel() {
 
   return (
     <div className="container">
-      <Link to={`/category/${id}`}>← Back</Link>
+      <PageHeader />
+      {/* <Link to={`/category/${id}`}>← Back</Link> */}
 
       <h1 className="page-title">🎡 {category.name}</h1>
 

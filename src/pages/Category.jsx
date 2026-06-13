@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadCategories, saveCategories } from "../utils/storage";
 import AddItemModal from "../components/AddItemModal";
+import PageHeader from "../components/PageHeader";
 
 function Category() {
   const { id } = useParams();
@@ -70,7 +71,7 @@ function Category() {
 
   return (
     <div className="container">
-      <Link to="/">← Back</Link>
+      <PageHeader />
 
       <h1 className="page-title">
         {category.icon} {category.name}
