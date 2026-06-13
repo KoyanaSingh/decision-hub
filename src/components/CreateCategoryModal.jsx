@@ -46,6 +46,7 @@ const TEMPLATES = [
 function CreateCategoryModal({ onClose, onCreate }) {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("📌");
+  const [showTemplates, setShowTemplates] = useState(false);
 
   const handleCreate = () => {
     if (!name.trim()) return;
@@ -88,27 +89,34 @@ function CreateCategoryModal({ onClose, onCreate }) {
 
         <hr />
 
-        <h3 style={{ marginTop: "20px" }}>Quick Templates</h3>
+        <button
+          className="template-toggle"
+          onClick={() => setShowTemplates(!showTemplates)}
+        >
+          {showTemplates ? "▲" : "▼"} Quick Templates
+        </button>
 
-        <div className="template-grid">
-          {TEMPLATES.map((template) => (
-            <button
-              key={template.name}
-              className="template-btn"
-              onClick={() => {
-                onCreate({
-                  name: template.name,
-                  icon: template.icon,
-                  items: template.items,
-                });
+        {showTemplates && (
+          <div className="template-grid">
+            {TEMPLATES.map((template) => (
+              <button
+                key={template.name}
+                className="template-btn"
+                onClick={() => {
+                  onCreate({
+                    name: template.name,
+                    icon: template.icon,
+                    items: template.items,
+                  });
 
-                onClose();
-              }}
-            >
-              {template.icon} {template.name}
-            </button>
-          ))}
-        </div>
+                  onClose();
+                }}
+              >
+                {template.icon} {template.name}
+              </button>
+            ))}
+          </div>
+        )}
 
         <div className="modal-actions">
           <button className="btn" onClick={onClose}>

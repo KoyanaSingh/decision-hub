@@ -241,7 +241,7 @@ a {
   max-width: 500px;
   border-radius: 20px;
   padding: 25px;
-  max-height: 85vh;
+  max-height: 95vh;
   overflow-y: auto;
 }
 
@@ -283,6 +283,7 @@ a {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: 25px;
 }
 
 .delete-confirm-btn {
@@ -338,6 +339,17 @@ a {
 
 .template-btn:hover {
   background: #f8fafc;
+}
+
+.template-toggle {
+  width: 100%;
+  margin-top: 15px;
+  border: none;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 @keyframes spin {

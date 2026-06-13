@@ -22,21 +22,46 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    if (categories.length) {
-      saveCategories(categories);
-    }
+    saveCategories(categories);
   }, [categories]);
 
-  const addCategory = ({ name, icon, items = [] }) => {
-    const newCategory = {
-      id: Date.now().toString(),
-      name,
-      icon,
-      items,
+  const existingCategory = categories.find(
+    (cat) => cat.name.toLowerCase() === name.toLowerCase(),
+  );
+
+  if (existingCategory && items.length > 0) {
+    const append = window.confirm(
+      `"${name}" already exists.\n\nAppend template items?`,
+    );
+
+    if (!append) return;
+
+    const updatedCategories = categories.map((cat) => {
+      if (cat.id === existingCategory.id) {
+        return {
+          ...cat,
+          items: [...new Set([...cat.items, ...items])],
+        };
+      }
+
+      return cat;
+    });
+
+    const addCategory = ({ name, icon, items = [] }) => {
+      const newCategory = {
+        id: Date.now().toString(),
+        name,
+        icon,
+        items,
+      };
+
+      setCategories(updatedCategories);
+
+      return;
     };
 
     setCategories([...categories, newCategory]);
-  };
+  }
 
   const deleteCategory = (id) => {
     const updated = categories.filter((category) => category.id !== id);
