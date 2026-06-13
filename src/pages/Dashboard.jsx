@@ -11,15 +11,11 @@ import CreateCategoryModal from "../components/CreateCategoryModal";
 import DeleteModal from "../components/DeleteModal";
 
 function Dashboard() {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(() => loadCategories());
   const [search, setSearch] = useState("");
   const [quickResult, setQuickResult] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState(null);
-
-  useEffect(() => {
-    setCategories(loadCategories());
-  }, []);
 
   useEffect(() => {
     saveCategories(categories);

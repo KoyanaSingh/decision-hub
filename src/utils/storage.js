@@ -33,7 +33,38 @@ export const loadCategories = () => {
             ];
         }
 
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+
+        if (!Array.isArray(parsed) || parsed.length === 0) {
+            return [
+                {
+                    id: "food",
+                    name: "Food",
+                    icon: "🍕",
+                    items: ["Pizza", "Burger", "Pasta"],
+                },
+                {
+                    id: "study",
+                    name: "Study",
+                    icon: "📚",
+                    items: ["DSA", "React", "Node.js"],
+                },
+                {
+                    id: "watch",
+                    name: "Watch",
+                    icon: "🎬",
+                    items: ["Interstellar", "Dark", "Friends"],
+                },
+                {
+                    id: "chores",
+                    name: "Chores",
+                    icon: "🏠",
+                    items: ["Laundry", "Clean Room"],
+                },
+            ];
+        }
+
+        return parsed;
     } catch {
         return [];
     }
